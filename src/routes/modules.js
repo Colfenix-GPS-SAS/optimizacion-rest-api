@@ -3,7 +3,7 @@ const router = express.Router();
 
 const mysqlConnection = require('../database');
 
-router.get('/', (req, res) => {
+router.get('/modules', (req, res) => {
     mysqlConnection.query('SELECT * FROM modulos', (err, rows, fields) => {
         if(!err){
             res.json(rows);
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/:id', (req,res) => {
+router.get('/modules/:id', (req,res) => {
     const { id } = req.params;
     mysqlConnection.query('SELECT * FROM modulos WHERE id = ?', [id], (err, rows, fields) => {
         if(!err){
@@ -24,7 +24,7 @@ router.get('/:id', (req,res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/modules', (req, res) => {
     const { modulo, icon } = req.body;
     mysqlConnection.query('INSERT INTO modulos (modulo, icon) VALUES (?, ?)', [modulo, icon], (err, rows, fields) => {
         if(!err){
@@ -34,7 +34,5 @@ router.post('/', (req, res) => {
         }
     });
 });
-
-
 
 module.exports = router;
