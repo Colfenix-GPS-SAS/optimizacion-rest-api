@@ -5,10 +5,10 @@ const app = express();
 app.set('port', process.env.PORT || 4000);
 
 // Middlewares
-
+app.use(express.json());
 
 // Routes
-
+app.use(require('./routes/modules'))
 
 // Server
 app.listen(app.get('port'), () => {
