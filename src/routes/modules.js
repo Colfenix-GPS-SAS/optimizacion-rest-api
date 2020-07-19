@@ -13,4 +13,15 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/:id', (req,res) => {
+    const { id } = req.params;
+    mysqlConnection.query('SELECT * FROM modulos WHERE id = ?', [id], (err, rows, fields) => {
+        if(!err){
+            res.json(rows);
+        } else {
+            console.log(err);
+        }
+    });
+});
+
 module.exports = router;
