@@ -17,7 +17,18 @@ router.get('/:id', (req,res) => {
     const { id } = req.params;
     mysqlConnection.query('SELECT * FROM modulos WHERE id = ?', [id], (err, rows, fields) => {
         if(!err){
-            res.json(rows);
+            res.json(rows[0]);
+        } else {
+            console.log(err);
+        }
+    });
+});
+
+router.post('/', (req, res) => {
+    const { id, modulo, icon, footer } = req.body;
+    mysqlConnection.query('INSERT INTO modulos (modulo, icon, footer) VALUES (?, ?, ?)', [modulo, icon, footer], (err, rows, fields) => {
+        if(!err){
+            res.json({Status: 'Status: 200, Save Response: Module saved'});
         } else {
             console.log(err);
         }
