@@ -25,8 +25,8 @@ router.get('/:id', (req,res) => {
 });
 
 router.post('/', (req, res) => {
-    const { id, modulo, icon, footer } = req.body;
-    mysqlConnection.query('INSERT INTO modulos (modulo, icon, footer) VALUES (?, ?, ?)', [modulo, icon, footer], (err, rows, fields) => {
+    const { modulo, icon } = req.body;
+    mysqlConnection.query('INSERT INTO modulos (modulo, icon) VALUES (?, ?)', [modulo, icon], (err, rows, fields) => {
         if(!err){
             res.json({Status: 'Status: 200, Save Response: Module saved'});
         } else {
@@ -34,5 +34,7 @@ router.post('/', (req, res) => {
         }
     });
 });
+
+
 
 module.exports = router;
