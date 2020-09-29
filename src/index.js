@@ -1,18 +1,9 @@
 const express = require('express');
-const app = express();
-const cors = require('cors');
+const config = require('./server/config')
+const app = config(express());
 
-// Settings
-app.set('port', process.env.PORT || 4000);
+// starting server
 
-// Middlewares
-app.use(express.json());
-app.use(cors());
-
-// Routes
-app.use(require('./routes/modules'))
-
-// Server
 app.listen(app.get('port'), () => {
     console.log('server on port', app.get('port'));
 });
